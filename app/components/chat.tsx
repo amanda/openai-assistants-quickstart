@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useSearchParams } from 'next/navigation'
 import styles from "./chat.module.css";
 import { AssistantStream } from "openai/lib/AssistantStream";
 import Markdown from "react-markdown";
@@ -85,6 +86,10 @@ const Chat = ({
     };
     createThread();
   }, []);
+
+  const params = useSearchParams()
+  const q = params.get('id')
+  console.log(q, threadId)
 
   const sendMessage = async (text) => {
     const response = await fetch(
